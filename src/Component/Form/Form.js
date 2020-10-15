@@ -81,18 +81,19 @@ class Form  extends React.Component{
         this.setState({optionsState:e.target.value,valierr:false})
     }
 
-    handlepassword=(e)=>{
+    handlepassword=(e)=>{// function to set the password
         this.setState({[e.target.name]:e.target.value,passworderr:false,valierr:false,passwordPattern:false})
     }
 
-    handletogglepassword=()=>{
+    handletogglepassword=()=>{// to toggle to the password
         const password = document.getElementsByClassName('Password')[0];
         const eye = document.getElementsByClassName('eye')[0];
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
     
     }
-    handletoggleConfirmpassword=()=>{
+
+    handletoggleConfirmpassword=()=>{// to toggle the confirm password
         const password = document.getElementsByClassName('confirmPassword')[0];
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
@@ -102,7 +103,7 @@ class Form  extends React.Component{
     handleSubmit=()=>{//functionn to trigger on submit
         const{firstName,lastName,Phone,email,options,password,selectedDate,submit,selectedOption,confirmPassword,optionsState}=this.state
             this.setState({submit:true},()=>{
-                if(firstName.trim()===""||lastName.trim()===""||Phone.trim()===""||email.trim()===""||password.trim()===""||selectedDate.trim()===""||confirmPassword.trim()===""||optionsState.trim()===""){
+                if(firstName.trim()===""||lastName.trim()===""||Phone.trim()===""||email.trim()===""||password.trim()===""||selectedDate.trim()===""||confirmPassword.trim()===""||optionsState.trim()===""){//logic to check if any field is empty or not
                     this.setState({valierr:true})
                 }else{
                     if(password.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")){//logic to check if password match the pattern
@@ -144,7 +145,8 @@ class Form  extends React.Component{
                             name="firstName"
                             value={firstName}
                             className={submit && firstName === "" ? "form-control Inputerror" : "form-control"}
-                            onChange={this.handlechange}/>
+                            onChange={this.handlechange}
+                            placeholder="FirstName"/>
                             <i className="fas fa-user"></i> 
                         </div>
                         <div className="form-group">
@@ -154,7 +156,8 @@ class Form  extends React.Component{
                             name="lastName"
                             className={submit && lastName === "" ? "form-control Inputerror" : "form-control"}
                             value={lastName}
-                            onChange={this.handlechange}/>
+                            onChange={this.handlechange}
+                            placeholder="LastName"/>
                             <i className="fas fa-user"></i> 
                         </div>
                         <div className="form-group">
@@ -164,11 +167,12 @@ class Form  extends React.Component{
                                 format="MM/dd/yyyy"
                                 value={selectedDate}
                                 className={submit && selectedDate=== "" ? "form-control Inputerror" : "form-control"}
-                                onChange={this.handleDateChange}/>
+                                onChange={this.handleDateChange}
+                                placeholder="Birth"/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="radio" className={submit && selectedOption === "" ? "required error-lblnew" : "required"}>Gender:</label>
-                        
+            
                             <div>
                                 <label className="checkbox-inline"><input type="radio"
                                     value="Male" name="selectedOption"
@@ -188,7 +192,8 @@ class Form  extends React.Component{
                                 className={submit && email === "" ? "form-control Inputerror" : "form-control"}
                                 name="email"
                                 value={email}
-                                onChange={this.handleemailvalidation} />
+                                onChange={this.handleemailvalidation}
+                                placeholder="Email" />
                                 <i className="fas fa-envelope"></i>
                             {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
                         </div>
@@ -198,7 +203,8 @@ class Form  extends React.Component{
                                 className={submit && Phone=== "" ? "form-control Inputerror tel" : "form-control tel"}
                                 name="Phone"
                                 value={Phone}
-                                onChange={this.handlephonevalidation} />
+                                onChange={this.handlephonevalidation}
+                                placeholder="Phone" />
                                 <i className="fas fa-phone"></i>
                             {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
                             {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
@@ -211,6 +217,7 @@ class Form  extends React.Component{
                                 name="password"
                                 value={password}
                                 onChange={this.handlepassword}
+                                placeholder="Password"
                                 />
                                 <i className="fas fa-eye eye"  onClick={this.handletogglepassword}></i> 
                         </div>
@@ -221,7 +228,8 @@ class Form  extends React.Component{
                                 className={submit && confirmPassword === "" ? "form-control Inputerror confirmPassword" : "form-control confirmPassword"}
                                 name="confirmPassword"
                                 value={confirmPassword}
-                                onChange={this.handlepassword}/>
+                                onChange={this.handlepassword}
+                                placeholder="Confirm Password"/>
                                 <i className="fas fa-eye "  onClick={this.handletoggleConfirmpassword}></i>
                         </div>
                         <div  className="form-group">
@@ -229,8 +237,8 @@ class Form  extends React.Component{
                             <select 
                             value={optionsState} 
                             onChange={this.setSelected}
+                            
                             className={submit && optionsState === "" ? "form-control Inputerror optionsState" : "form-control optionsState"}>
-                                 <option value=""></option>
                                 <option value="Apple">Apple</option>
                                 <option value="Banana">Banana</option>
                                 <option value="Cranberry">Cranberry</option>
@@ -238,9 +246,12 @@ class Form  extends React.Component{
                         </div>
                     </div>
                     <div>
+                    <div className="errorcontainer">
                         {passworderr?<p className="error">Password and Confirm Password must be same</p>:""}
                         {valierr?<p className="error">Please fill all the mandatory  field</p>:""}
                         {passwordPattern?<p className="error">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>:""}
+                    </div>
+                        
                         <button onClick={this.handleSubmit} 
                         className={this.state.disabled ? "disable" : "primaryBtn"}
                         

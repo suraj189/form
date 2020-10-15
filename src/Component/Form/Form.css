@@ -1,17 +1,21 @@
 .formContainer {
     margin: 0 auto;
-    width: 80%;
+    width: 60%;
     text-align: left;
+    border: 1px solid #000;
 }
 
-.form {
+h2 ,.errorcontainer { margin-left: 16%;}
 
-    width: 80%;
+.form {
+    margin: 0 auto;
+    width: 70%;
     display: flex;
     justify-content:space-between;
     align-items: center;
     flex-wrap: wrap;
 }
+
 
 .form-group { 
     position: relative;
@@ -22,43 +26,41 @@
     flex-basis: 42%;
 }
 
-input  {
+.form :last-child { flex-basis: 100%;}
+
+input ,  .optionsState {
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 9px;
     border: 1px solid;
     color: #000;
     font-weight: 600;
+    background-color:  #f2f2f2;
+    /* box-shadow: 7px 9px 19px 0px rgba(0,0,0,0.75); */
+}
+
+input:focus ,.optionsState:focus  { 
+    outline: none !important;
+    border-color: #719ECE;
+    
 }
 
 label { margin-bottom: 5px ;}
 
-.optionsState {
-    margin-bottom: 5px;
-    padding: 5px;
-    color: #000;
-    border: 1px solid;
-    font-weight: 600;
-}
 
-
-
-.checkbox-inline input {
-    margin-right: 5px;
-}
+.checkbox-inline input { margin-right: 5px; }
 
 .checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline {
     margin-top: 0;
     margin-left: 10px;
 }
 
-.required::after
-{
+.required::after{
     color: red;
     content: " *";
 }
 
 .primaryBtn {
-    margin: 5px  0 0 8px;
+    margin:  8px 0 8px 16%; 
     background-color: blue;
     color: #fff;
     border: 1px solid blue;
@@ -78,24 +80,34 @@ label { margin-bottom: 5px ;}
 
 .Inputerror { border: 1px solid #eb516d;  }
 
-.error { color: #eb516d;}
+.error { 
+    font-size: 12px;
+    color: #eb516d;
+}
 
 
 .fa-eye ,.fa-user,.fa-envelope, .fa-phone { 
     position: absolute;
-    top: 32px;
+    top: 34px;
     right: 5px;
     cursor: pointer;
 }
 
 .disable {
-    margin: 5px  0 0 8px;
+    margin:  8px 0 8px 16%; 
     background-color: rgb(181, 181, 190);
     color: #fff;
-    border: 1px solid blue;
+    border: 1px solid rgb(181, 181, 190);
     padding: 9px 37px;
     font-size: 16px;
     font-weight: 700;
     border-radius: 10px;
 
 }
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .formContainer { width: 80%;}
+   
+}
+
+
