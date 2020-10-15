@@ -1,0 +1,101 @@
+.formContainer {
+    margin: 0 auto;
+    width: 80%;
+    text-align: left;
+}
+
+.form {
+
+    width: 80%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-group { 
+    position: relative;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-basis: 42%;
+}
+
+input  {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid;
+    color: #000;
+    font-weight: 600;
+}
+
+label { margin-bottom: 5px ;}
+
+.optionsState {
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #000;
+    border: 1px solid;
+    font-weight: 600;
+}
+
+
+
+.checkbox-inline input {
+    margin-right: 5px;
+}
+
+.checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.required::after
+{
+    color: red;
+    content: " *";
+}
+
+.primaryBtn {
+    margin: 5px  0 0 8px;
+    background-color: blue;
+    color: #fff;
+    border: 1px solid blue;
+    padding: 9px 37px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.primaryBtn:hover {
+    border: 1px solid blue;
+    color:blue;
+    background-color: #fff;
+    transition: .5s ease;
+    cursor: pointer;
+}
+
+.Inputerror { border: 1px solid #eb516d;  }
+
+.error { color: #eb516d;}
+
+
+.fa-eye ,.fa-user,.fa-envelope, .fa-phone { 
+    position: absolute;
+    top: 32px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.disable {
+    margin: 5px  0 0 8px;
+    background-color: rgb(181, 181, 190);
+    color: #fff;
+    border: 1px solid blue;
+    padding: 9px 37px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+
+}
