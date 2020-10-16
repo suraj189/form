@@ -1,7 +1,27 @@
 
 import React, { Fragment } from "react"
-import MultiSelect from "react-multi-select-component";
+import PersonIcon from '@material-ui/icons/Person'; 
+import Emailicon from "@material-ui/icons/Email"
+import Phoneicon from "@material-ui/icons/Phone"
+import Lockicon from "@material-ui/icons/Lock"
+import Eyeicon from "@material-ui/icons/RemoveRedEye"
+import Button from '@material-ui/core/Button'
+import Calendaricon from "@material-ui/icons/CalendarToday"
+
+
+import {
+  MuiPickersUtilsProvider,
+  TimePicker,
+  DatePicker
+} from "material-ui-pickers";
+import DateFnsUtils from '@date-io/date-fns'
 import "./Form.css"
+
+const styles = {
+    grid: {
+      width: "60%"
+    }
+  };
 
 
 class Form  extends React.Component{
@@ -16,7 +36,7 @@ class Form  extends React.Component{
             select:"",
             password:"",
             confirmpassword:"",
-            selectedDate:"",
+            selectedDate:null,
             radio:"",
             selectedOption:"Male",
             submit:false,
@@ -32,8 +52,8 @@ class Form  extends React.Component{
         }
     }
 
-    handleDateChange=(e)=>{//function for setting the date in the state
-        this.setState({selectedDate:e.target.value,valierr:false})
+    handleDateChange=(date)=>{//function for setting the date in the state
+        this.setState({selectedDate:date,valierr:false})
     }
 
     handlechange=(e)=>{//functionn for setting the value first name and last name
@@ -132,6 +152,7 @@ class Form  extends React.Component{
     
 
     render(){
+        const { classes } = this.props;
         const{firstName,lastName,Phone,email,passwordPattern,password,selectedDate,submit,selectedOption,valierr,confirmPassword,optionsState,passworderr}=this.state
         return(
             <Fragment>
@@ -139,40 +160,42 @@ class Form  extends React.Component{
                     <h2>Registration Form</h2>
                     <div className="form">
                         <div className="form-group">
-                            <label className="required">First Name</label>
+                            <PersonIcon/> 
                             <input
                             type="text"
                             name="firstName"
                             value={firstName}
-                            className={submit && firstName === "" ? "form-control Inputerror" : "form-control"}
+                            className={submit && firstName === "" ? "form-control Inputerror required" : "form-control required"}
                             onChange={this.handlechange}
-                            placeholder="FirstName"/>
-                            <i className="fas fa-user"></i> 
+                            placeholder="FirstName &#x2a;" />
                         </div>
                         <div className="form-group">
-                            <label className="required">Last Name</label>
+                            <PersonIcon/> 
                             <input
                             type="text"
                             name="lastName"
                             className={submit && lastName === "" ? "form-control Inputerror" : "form-control"}
                             value={lastName}
                             onChange={this.handlechange}
-                            placeholder="LastName"/>
-                            <i className="fas fa-user"></i> 
+                            placeholder="LastName &#x2a;"/>
+                            
                         </div>
                         <div className="form-group">
-                            <label className="required">BirthDay</label>
-                            <input
-                                type="date"    
-                                format="MM/dd/yyyy"
-                                value={selectedDate}
-                                className={submit && selectedDate=== "" ? "form-control Inputerror" : "form-control"}
-                                onChange={this.handleDateChange}
-                                placeholder="Birth"/>
+                            <Calendaricon/> 
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <DatePicker
+                                    // style={submit && selectedDate=== null ? "form-control Inputerror date" : "form-control date"}
+                                    value={selectedDate}
+                                    format="dd/MM/yyyy"
+                                    onChange={this.handleDateChange}
+                                    animateYearScrolling
+                                    placeholder="Date &#x2a;"
+                                    style={{color:"#000",borderBottom:"1px solid"}}
+                                />
+                            </MuiPickersUtilsProvider> 
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="radio" className={submit && selectedOption === "" ? "required error-lblnew" : "required"}>Gender:</label>
-            
+                        <div className="form-group Radio">
+                            <label htmlFor="radio" >Gender:</label>
                             <div>
                                 <label className="checkbox-inline"><input type="radio"
                                     value="Male" name="selectedOption"
@@ -186,59 +209,59 @@ class Form  extends React.Component{
                             </div>
                             
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="email" className={submit && email === "" ? "required error-lblnew" : "required"}>Email:</label>
+                        <div className="form-group"> 
+                            <Emailicon/>              
                             <input type="text"
                                 className={submit && email === "" ? "form-control Inputerror" : "form-control"}
                                 name="email"
                                 value={email}
                                 onChange={this.handleemailvalidation}
-                                placeholder="Email" />
-                                <i className="fas fa-envelope"></i>
-                            {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
+                                placeholder="Email &#x2a;" />  
+                            
                         </div>
                         <div className="form-group">
-                            <label htmlFor="email" className="required"> Phone Number:</label>
+                            <Phoneicon/>
                             <input type="text"
                                 className={submit && Phone=== "" ? "form-control Inputerror tel" : "form-control tel"}
                                 name="Phone"
                                 value={Phone}
                                 onChange={this.handlephonevalidation}
-                                placeholder="Phone" />
-                                <i className="fas fa-phone"></i>
-                            {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
-                            {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
+                                placeholder="Phone &#x2a;" />
+                           
                         </div>
                         <div className="form-group">
-                            <label className="required">Password</label>
+                            < Lockicon/>
+                            
                                 <input
-                                type="password"
-                                className={submit && password === "" ? "form-control Inputerror Password" : "form-control Password"}
-                                name="password"
-                                value={password}
-                                onChange={this.handlepassword}
-                                placeholder="Password"
+                                    type="password"
+                                    className={submit && password === "" ? "form-control Inputerror Password" : "form-control Password"}
+                                    name="password"
+                                    value={password}
+                                    onChange={this.handlepassword}
+                                    placeholder="Password &#x2a;"
                                 />
-                                <i className="fas fa-eye eye"  onClick={this.handletogglepassword}></i> 
+                                {/* <Eyeicon  onClick={this.handletogglepassword}/> */}
+                            
                         </div>
                         <div className="form-group">
-                            <label className="required"> Confirm Password</label>
+                            < Lockicon/>
+                            
                                 <input
-                                type="password"
-                                className={submit && confirmPassword === "" ? "form-control Inputerror confirmPassword" : "form-control confirmPassword"}
-                                name="confirmPassword"
-                                value={confirmPassword}
-                                onChange={this.handlepassword}
-                                placeholder="Confirm Password"/>
-                                <i className="fas fa-eye "  onClick={this.handletoggleConfirmpassword}></i>
+                                    type="password"
+                                    className={submit && confirmPassword === "" ? "form-control Inputerror confirmPassword" : "form-control confirmPassword"}
+                                    name="confirmPassword"
+                                    value={confirmPassword}
+                                    onChange={this.handlepassword}
+                                    placeholder="Confirm Password &#x2a;"/>
+                                {/* <Eyeicon  onClick={this.handletoggleConfirmpassword}/> */}
+                            
                         </div>
                         <div  className="form-group">
-                            <label className="required"> Select</label>
                             <select 
-                            value={optionsState} 
-                            onChange={this.setSelected}
-                            
-                            className={submit && optionsState === "" ? "form-control Inputerror optionsState" : "form-control optionsState"}>
+                                value={optionsState} 
+                                onChange={this.setSelected}
+                                className={submit && optionsState === "" ? "form-control Inputerror optionsState" : "form-control optionsState"}>
+                               <option value="">Select &#x2a;</option>
                                 <option value="Apple">Apple</option>
                                 <option value="Banana">Banana</option>
                                 <option value="Cranberry">Cranberry</option>
@@ -246,18 +269,23 @@ class Form  extends React.Component{
                         </div>
                     </div>
                     <div>
-                    <div className="errorcontainer">
-                        {passworderr?<p className="error">Password and Confirm Password must be same</p>:""}
-                        {valierr?<p className="error">Please fill all the mandatory  field</p>:""}
-                        {passwordPattern?<p className="error">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>:""}
-                    </div>
+                        <div className="errorcontainer">
+                            {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
+                            {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
+                            {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
+                            {passworderr?<p className="error">Password and Confirm Password must be same</p>:""}
+                            {valierr?<p className="error">Please fill all the mandatory  field</p>:""}
+                            {passwordPattern?<p className="error">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>:""}
+                        </div>
+                        <div className="primarybtn">
+                            <Button variant="contained" 
+                                color="primary"
+                                onClick={this.handleSubmit}
+                                disabled={this.state.disabled}>
+                                Submit
+                            </Button>
+                        </div>
                         
-                        <button onClick={this.handleSubmit} 
-                        className={this.state.disabled ? "disable" : "primaryBtn"}
-                        
-                         disabled={this.state.disabled}>
-                            Submit
-                        </button>
                     </div>
                 </div>
             </Fragment>

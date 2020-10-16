@@ -3,9 +3,12 @@
     width: 60%;
     text-align: left;
     border: 1px solid #000;
+    text-align: left;
 }
 
-h2 ,.errorcontainer { margin-left: 16%;}
+.primarybtn {margin: 20px 0 20px 0;}
+h2,.primarybtn,.errorcontainer { margin-left: 16%;}
+
 
 .form {
     margin: 0 auto;
@@ -18,30 +21,33 @@ h2 ,.errorcontainer { margin-left: 16%;}
 
 
 .form-group { 
-    position: relative;
-    margin: 10px;
+    margin: 30px 10px 20px;
+    display: flex;
+    flex-basis: 42%;  
+    justify-content: space-between;
+}
+
+.Radio {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    flex-basis: 42%;
 }
 
 .form :last-child { flex-basis: 100%;}
 
-input ,  .optionsState {
-    margin-bottom: 5px;
-    padding: 9px;
-    border: 1px solid;
+input ,  .optionsState{
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid;
     color: #000;
     font-weight: 600;
-    background-color:  #f2f2f2;
+    /* background-color:  #f2f2f2; */
     /* box-shadow: 7px 9px 19px 0px rgba(0,0,0,0.75); */
 }
 
-input:focus ,.optionsState:focus  { 
+input:focus ,.optionsState:focus,.MuiInputBase-input:focus  { 
     outline: none !important;
-    border-color: #719ECE;
-    
+    border-bottom: 2px solid #719ECE;
 }
 
 label { margin-bottom: 5px ;}
@@ -54,29 +60,9 @@ label { margin-bottom: 5px ;}
     margin-left: 10px;
 }
 
-.required::after{
-    color: red;
-    content: " *";
-}
 
-.primaryBtn {
-    margin:  8px 0 8px 16%; 
-    background-color: blue;
-    color: #fff;
-    border: 1px solid blue;
-    padding: 9px 37px;
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 10px;
-}
 
-.primaryBtn:hover {
-    border: 1px solid blue;
-    color:blue;
-    background-color: #fff;
-    transition: .5s ease;
-    cursor: pointer;
-}
+
 
 .Inputerror { border: 1px solid #eb516d;  }
 
@@ -86,26 +72,30 @@ label { margin-bottom: 5px ;}
 }
 
 
-.fa-eye ,.fa-user,.fa-envelope, .fa-phone { 
+.fa-lock,.fa-user,.fa-envelope, .fa-phone { 
     position: absolute;
-    top: 34px;
+    top: 4px;
+    font-size: 16px;
+    left: -20px;
+}
+
+.fa-eye  { 
+    position: absolute;
+    top: 4px;
     right: 5px;
     cursor: pointer;
-}
-
-.disable {
-    margin:  8px 0 8px 16%; 
-    background-color: rgb(181, 181, 190);
-    color: #fff;
-    border: 1px solid rgb(181, 181, 190);
-    padding: 9px 37px;
     font-size: 16px;
-    font-weight: 700;
-    border-radius: 10px;
-
 }
 
+
+
+/* styling for datepicker  */ */
+.form-group .MuiFormControl-root .MuiInput-formControl>input { 
+    border-bottom: 2px solid !important;
+    color: #000 !important;
+}
 @media screen and (max-width: 1024px) and (min-width: 768px) {
+    
     .formContainer { width: 80%;}
    
 }
