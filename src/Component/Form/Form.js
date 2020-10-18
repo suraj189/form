@@ -124,7 +124,7 @@ class Form  extends React.Component{
     handleSubmit=()=>{//functionn to trigger on submit
         const{firstName,lastName,Phone,email,options,password,selectedDate,submit,selectedOption,confirmPassword,optionsState}=this.state
             this.setState({submit:true},()=>{
-                if(firstName.trim()===""||lastName.trim()===""||Phone.trim()===""||email.trim()===""||password.trim()===""||selectedDate.trim()===""||confirmPassword.trim()===""||optionsState.trim()===""){//logic to check if any field is empty or not
+                if(firstName.trim()===""||lastName.trim()===""||Phone.trim()===""||email.trim()===""||password.trim()===""||selectedDate===null||confirmPassword.trim()===""||optionsState.trim()===""){//logic to check if any field is empty or not
                     this.setState({valierr:true})
                 }else{
                     if(password.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$")){//logic to check if password match the pattern
@@ -173,36 +173,35 @@ class Form  extends React.Component{
                             className={submit && firstName === "" ? "form-control Inputerror required" : "form-control required"}
                             onChange={this.handlechange}
                             placeholder="FirstName &#x2a;" />
+                            {submit && firstName === "" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> : ""}
                         </div>
                         <div className="form-group">
                             <PersonIcon/> 
                             <input
                             type="text"
                             name="lastName"
-                            className={submit && lastName === "" ? "form-control Inputerror" : "form-control"}
+                            className="form-control"
                             value={lastName}
                             onChange={this.handlechange}
                             placeholder="LastName &#x2a;"/>
+                            {submit && lastName === "" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> : ""}
                             
                         </div>
                         <div className="form-group">
                             <Calendaricon/> 
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                           
                                 <DatePicker
-                                    style={submit && selectedDate=== null ? "form-control Inputerror date" : "form-control date"}
                                     value={selectedDate}
                                     format="dd/MM/yyyy"
                                     onChange={this.handleDateChange}
                                     animateYearScrolling
                                     placeholder="Date &#x2a;"
                                     style={{color: "#000",borderBottom:"2px solid #000"}}
-                                    InputProps={{ className: "datepcker"}}
                                 />
-                            
                             </MuiPickersUtilsProvider> 
-                          
+                            {submit && selectedDate ===null ? <i class="fa fa-exclamation-circle date" aria-hidden="true"></i> : ""}
                         </div>
+                       
                         <div className="form-group Radio">
                             <label htmlFor="radio" >Gender:</label>
                             <div>
@@ -215,19 +214,20 @@ class Form  extends React.Component{
                                     checked={selectedOption === "Female"}
                                     name="selectedOption"
                                     onChange={this.handleSelectoption} /> Female</label>
+                                    {submit && selectedOption ==="" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> : ""}
                             </div>
                             
                         </div>
                         <div className="form-group"> 
                             <Emailicon/>              
                             <input type="text"
-                                className={submit && email === "" ? "form-control Inputerror" : "form-control"}
+                                className="form-control"
                                 name="email"
                                 value={email}
                                 onChange={this.handleemailvalidation}
                                 placeholder="Email &#x2a;" />  
-                                {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
-                            
+                                {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : ""}
+                                {submit && email ==="" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> : ""}
                         </div>
                         <div className="form-group">
                             <Phoneicon/>
@@ -237,8 +237,9 @@ class Form  extends React.Component{
                                 value={Phone}
                                 onChange={this.handlephonevalidation}
                                 placeholder="Phone &#x2a;" />
-                                {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
-                            {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
+                                {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : ""}
+                                {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> :""}
+                                {submit && Phone ==="" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> : ""}
                            
                         </div>
                         <div className="form-group">
@@ -246,26 +247,27 @@ class Form  extends React.Component{
                             <div className="passwordcontainer">
                                 <input
                                     type="password"
-                                    className={submit && password === "" ? "form-control Inputerror Password" : "form-control Password"}
+                                    className="form-control"
                                     name="password"
                                     value={password}
                                     onChange={this.handlepassword}
                                     placeholder="Password &#x2a;"
                                 />
-                                <Eyeicon  onClick={this.handletogglepassword}/>
-                                </div>
+                                {submit && password ==="" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> :<Eyeicon  onClick={this.handletogglepassword}/>}
+                            </div>
                         </div>
                         <div className="form-group">
                             < Lockicon/>
                             <div className="passwordcontainer">
                                 <input
                                     type="password"
-                                    className={submit && confirmPassword === "" ? "form-control Inputerror confirmPassword" : "form-control confirmPassword"}
+                                    className= "form-control"
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     onChange={this.handlepassword}
                                     placeholder="Confirm Password &#x2a;"/>
-                                <Eyeicon  onClick={this.handletoggleConfirmpassword}/>
+                                
+                                {submit && confirmPassword ==="" ? <i class="fa fa-exclamation-circle" aria-hidden="true"></i> :<Eyeicon  onClick={this.handletoggleConfirmpassword}/>}
                             </div>
                             
                         </div>
@@ -273,18 +275,17 @@ class Form  extends React.Component{
                             <select 
                                 value={optionsState} 
                                 onChange={this.setSelected}
-                                className={submit && optionsState === "" ? "form-control Inputerror optionsState" : "form-control optionsState"}>
+                                className="form-control optionsState">
                                 <option value="" className="placeholder">Select &#x2a;</option>
                                 <option value="Apple">Apple</option>
                                 <option value="Banana">Banana</option>
                                 <option value="Cranberry">Cranberry</option>
                             </select>
+                            {submit && optionsState ==="" ? <i class="fa fa-exclamation-circle option" aria-hidden="true"></i>: ""}
                         </div>
                     </div>
                     <div>
                         <div className="errorcontainer">
-                           
-                            
                             {passworderr?<p className="error">Password and Confirm Password must be same</p>:""}
                             {valierr?<p className="error">Please fill all the mandatory  field</p>:""}
                             {passwordPattern?<p className="error">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>:""}

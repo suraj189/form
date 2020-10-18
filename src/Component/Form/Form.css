@@ -21,11 +21,10 @@ h2,.primarybtn,.errorcontainer { margin-left: 14%;}
 
 
 .form-group { 
-    margin: 30px 10px 20px;
+    margin: 30px 0 20px;
     display: flex;
-    flex-basis: 43%;  
-    flex-wrap: wrap;
-    
+    flex-basis: 45%;  
+    flex-wrap: wrap;  
 }
 
 .Radio {
@@ -36,13 +35,13 @@ h2,.primarybtn,.errorcontainer { margin-left: 14%;}
 
 
 
-input ,  .optionsState{
+input ,.optionsState{
     padding: 5px;
     border: none;
     border-bottom: 2px solid;
     color: #000;
     font-weight: 600;
-    flex-basis: 78%;
+    flex-basis: 80%;
 }
 
 .passwordcontainer {
@@ -52,12 +51,11 @@ input ,  .optionsState{
 
 .passwordcontainer input {
     display: flex;
-    flex-basis: 90%;
+    flex-basis: 89%;
 }
 
-.select,.optionsState {
-    flex-basis: 100%;
-}
+.select{ flex-basis: 98%; }
+.optionsState { flex-basis: 96%;}
 
 ::placeholder {
     color: lightgrey;
@@ -68,7 +66,8 @@ input ,  .optionsState{
     font-weight: 400;
     line-height: 1.1876em;
     letter-spacing: 0.00938em;
-  }
+}
+
 
 input:focus ,.optionsState:focus,.MuiInputBase-input:focus  { 
     outline: none !important;
@@ -84,11 +83,10 @@ input:focus ,.optionsState:focus,.MuiInputBase-input:focus  {
 }
 
 
-.Inputerror { border: 1px solid #eb516d;  }
 
-.error { 
+.error,.fa-exclamation-circle  { 
     font-size: 12px;
-    color: #eb516d;
+    color: red;
 }
 
 
@@ -107,14 +105,66 @@ input:focus ,.optionsState:focus,.MuiInputBase-input:focus  {
     font-size: 16px;
 } */
 
+.fa-exclamation-circle { 
+    margin-top: 3px;
+    font-size: 16px;
+}
+.date { margin-left: 20%;}
+.option {margin-left: 11px;}
 
 
+@media screen and (max-width: 1450px){
+    .date { margin-left: 36px;}
+    .option {margin-left: 3px;}
+    .optionsState { flex-basis: 96%;}
+}
 
-@media screen and (max-width: 1165px){
-    
-    .formContainer { width: 75%;}
+@media screen and (max-width: 1339px){
+    .date { margin-left: 9%;}
+}
+
+
+@media screen and (max-width: 1320px){
+    .date { margin-left: 11%;}
+    .option {margin-left: 3px;}
+    .optionsState { flex-basis: 96%;}
+}
+@media screen and (max-width: 1304px){
+    .date { margin-left: 9%;}
+}
+@media screen and (max-width: 1290px){
+    .date { margin-left: 10%;}
+    .option {margin-left: 3px;}
+    .optionsState { flex-basis: 95%;}
+}
+@media screen and (max-width: 1276px){
+    .date { margin-left: 8%;}
    
 }
+
+@media screen and (max-width: 1262px){
+    .date { margin-left: 7%;}
+    .option {margin-left: 4px;}
+    .optionsState { flex-basis: 95%;}
+}
+@media screen and (max-width: 1262px){.date { margin-left: 6%;}  }
+
+@media screen and (max-width: 1236px){
+    
+    .form-group { flex-basis: 45%; }
+    .date { margin-left: 1%;}
+    input{flex-basis: 75%;}
+    .passwordcontainer input {flex-basis: 83%;}
+    .select{ flex-basis: 100%;}
+}
+
+
+@media screen and (max-width: 1192px){
+    .formContainer { width: 75%;}
+    .date { margin-left: 4%;}
+}
+
+
 @media screen and (max-width: 1024px) {
     .formContainer { width: 80%;}
     .form {width: 85%;}
@@ -122,7 +172,6 @@ input:focus ,.optionsState:focus,.MuiInputBase-input:focus  {
 
 @media screen and (max-width: 930px) {
     .formContainer { width: 86%;}
-    
-   
+     
 }
 
