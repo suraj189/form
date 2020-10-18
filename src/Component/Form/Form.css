@@ -7,12 +7,12 @@
 }
 
 .primarybtn {margin: 20px 0 20px 0;}
-h2,.primarybtn,.errorcontainer { margin-left: 16%;}
+h2,.primarybtn,.errorcontainer { margin-left: 14%;}
 
 
 .form {
     margin: 0 auto;
-    width: 70%;
+    width: 75%;
     display: flex;
     justify-content:space-between;
     align-items: center;
@@ -23,8 +23,9 @@ h2,.primarybtn,.errorcontainer { margin-left: 16%;}
 .form-group { 
     margin: 30px 10px 20px;
     display: flex;
-    flex-basis: 42%;  
-    justify-content: space-between;
+    flex-basis: 43%;  
+    flex-wrap: wrap;
+    
 }
 
 .Radio {
@@ -33,7 +34,7 @@ h2,.primarybtn,.errorcontainer { margin-left: 16%;}
     justify-content: flex-start;
 }
 
-.form :last-child { flex-basis: 100%;}
+
 
 input ,  .optionsState{
     padding: 5px;
@@ -41,16 +42,38 @@ input ,  .optionsState{
     border-bottom: 2px solid;
     color: #000;
     font-weight: 600;
-    /* background-color:  #f2f2f2; */
-    /* box-shadow: 7px 9px 19px 0px rgba(0,0,0,0.75); */
+    flex-basis: 78%;
 }
+
+.passwordcontainer {
+    display: flex;
+    flex-basis: 90%;
+}
+
+.passwordcontainer input {
+    display: flex;
+    flex-basis: 90%;
+}
+
+.select,.optionsState {
+    flex-basis: 100%;
+}
+
+::placeholder {
+    color: lightgrey;
+    font-size: 1rem;
+    box-sizing: border-box;
+    align-items: center;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.1876em;
+    letter-spacing: 0.00938em;
+  }
 
 input:focus ,.optionsState:focus,.MuiInputBase-input:focus  { 
     outline: none !important;
     border-bottom: 2px solid #719ECE;
 }
-
-label { margin-bottom: 5px ;}
 
 
 .checkbox-inline input { margin-right: 5px; }
@@ -61,9 +84,6 @@ label { margin-bottom: 5px ;}
 }
 
 
-
-
-
 .Inputerror { border: 1px solid #eb516d;  }
 
 .error { 
@@ -72,7 +92,7 @@ label { margin-bottom: 5px ;}
 }
 
 
-.fa-lock,.fa-user,.fa-envelope, .fa-phone { 
+/* .fa-lock,.fa-user,.fa-envelope, .fa-phone { 
     position: absolute;
     top: 4px;
     font-size: 16px;
@@ -85,19 +105,24 @@ label { margin-bottom: 5px ;}
     right: 5px;
     cursor: pointer;
     font-size: 16px;
-}
+} */
 
 
 
-/* styling for datepicker  */ */
-.form-group .MuiFormControl-root .MuiInput-formControl>input { 
-    border-bottom: 2px solid !important;
-    color: #000 !important;
-}
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+
+@media screen and (max-width: 1165px){
     
-    .formContainer { width: 80%;}
+    .formContainer { width: 75%;}
    
 }
+@media screen and (max-width: 1024px) {
+    .formContainer { width: 80%;}
+    .form {width: 85%;}
+}
 
+@media screen and (max-width: 930px) {
+    .formContainer { width: 86%;}
+    
+   
+}
 

@@ -11,21 +11,19 @@ import Calendaricon from "@material-ui/icons/CalendarToday"
 
 import {
   MuiPickersUtilsProvider,
-  TimePicker,
   DatePicker
 } from "material-ui-pickers";
 import DateFnsUtils from '@date-io/date-fns'
 import "./Form.css"
+import DatePIcker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
-const styles = {
-    grid: {
-      width: "60%"
-    }
-  };
+
 
 
 class Form  extends React.Component{
-
+    
+   
     constructor(){
         super()
         this.state={
@@ -52,16 +50,20 @@ class Form  extends React.Component{
         }
     }
 
+    
+
     handleDateChange=(date)=>{//function for setting the date in the state
         this.setState({selectedDate:date,valierr:false})
     }
 
     handlechange=(e)=>{//functionn for setting the value first name and last name
-        if(e.target.value.match(/^[a-zA-Z]+$/)){
-            this.setState({[e.target.name]:e.target.value})
+        
+        if(e.target.value.match(/^[a-zA-Z ]*$/)){
+            this.setState({ [e.target.name]: e.target.value, valierr: false })
         }else{
-            //dont do anything
+
         }
+       
        
     }
 
@@ -107,7 +109,6 @@ class Form  extends React.Component{
 
     handletogglepassword=()=>{// to toggle to the password
         const password = document.getElementsByClassName('Password')[0];
-        const eye = document.getElementsByClassName('eye')[0];
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
     
@@ -152,7 +153,11 @@ class Form  extends React.Component{
     
 
     render(){
-        const { classes } = this.props;
+        const ExampleCustomInput = ({ value, onClick }) => (
+            <button className="example-custom-input" onClick={onClick}>
+              {value}
+            </button>
+          );
         const{firstName,lastName,Phone,email,passwordPattern,password,selectedDate,submit,selectedOption,valierr,confirmPassword,optionsState,passworderr}=this.state
         return(
             <Fragment>
@@ -183,16 +188,20 @@ class Form  extends React.Component{
                         <div className="form-group">
                             <Calendaricon/> 
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                           
                                 <DatePicker
-                                    // style={submit && selectedDate=== null ? "form-control Inputerror date" : "form-control date"}
+                                    style={submit && selectedDate=== null ? "form-control Inputerror date" : "form-control date"}
                                     value={selectedDate}
                                     format="dd/MM/yyyy"
                                     onChange={this.handleDateChange}
                                     animateYearScrolling
                                     placeholder="Date &#x2a;"
-                                    style={{color:"#000",borderBottom:"1px solid"}}
+                                    style={{color: "#000",borderBottom:"2px solid #000"}}
+                                    InputProps={{ className: "datepcker"}}
                                 />
+                            
                             </MuiPickersUtilsProvider> 
+                          
                         </div>
                         <div className="form-group Radio">
                             <label htmlFor="radio" >Gender:</label>
@@ -217,6 +226,7 @@ class Form  extends React.Component{
                                 value={email}
                                 onChange={this.handleemailvalidation}
                                 placeholder="Email &#x2a;" />  
+                                {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
                             
                         </div>
                         <div className="form-group">
@@ -227,11 +237,13 @@ class Form  extends React.Component{
                                 value={Phone}
                                 onChange={this.handlephonevalidation}
                                 placeholder="Phone &#x2a;" />
+                                {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
+                            {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
                            
                         </div>
                         <div className="form-group">
                             < Lockicon/>
-                            
+                            <div className="passwordcontainer">
                                 <input
                                     type="password"
                                     className={submit && password === "" ? "form-control Inputerror Password" : "form-control Password"}
@@ -240,12 +252,12 @@ class Form  extends React.Component{
                                     onChange={this.handlepassword}
                                     placeholder="Password &#x2a;"
                                 />
-                                {/* <Eyeicon  onClick={this.handletogglepassword}/> */}
-                            
+                                <Eyeicon  onClick={this.handletogglepassword}/>
+                                </div>
                         </div>
                         <div className="form-group">
                             < Lockicon/>
-                            
+                            <div className="passwordcontainer">
                                 <input
                                     type="password"
                                     className={submit && confirmPassword === "" ? "form-control Inputerror confirmPassword" : "form-control confirmPassword"}
@@ -253,15 +265,16 @@ class Form  extends React.Component{
                                     value={confirmPassword}
                                     onChange={this.handlepassword}
                                     placeholder="Confirm Password &#x2a;"/>
-                                {/* <Eyeicon  onClick={this.handletoggleConfirmpassword}/> */}
+                                <Eyeicon  onClick={this.handletoggleConfirmpassword}/>
+                            </div>
                             
                         </div>
-                        <div  className="form-group">
+                        <div  className="form-group select">
                             <select 
                                 value={optionsState} 
                                 onChange={this.setSelected}
                                 className={submit && optionsState === "" ? "form-control Inputerror optionsState" : "form-control optionsState"}>
-                               <option value="">Select &#x2a;</option>
+                                <option value="" className="placeholder">Select &#x2a;</option>
                                 <option value="Apple">Apple</option>
                                 <option value="Banana">Banana</option>
                                 <option value="Cranberry">Cranberry</option>
@@ -270,9 +283,8 @@ class Form  extends React.Component{
                     </div>
                     <div>
                         <div className="errorcontainer">
-                            {this.state.emailerr ? <p className="error">Use Valid Email Address*</p> : <div></div>}
-                            {this.state.telerr ? <p className="error">Phone number can be numbers only*</p> : <div></div>}
-                            {this.state.telLener ? <p className="error">Phone number  should be of  atleast 10 digit  *</p> : <div></div>}
+                           
+                            
                             {passworderr?<p className="error">Password and Confirm Password must be same</p>:""}
                             {valierr?<p className="error">Please fill all the mandatory  field</p>:""}
                             {passwordPattern?<p className="error">Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>:""}
